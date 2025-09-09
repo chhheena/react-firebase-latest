@@ -1,8 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 import { Icon } from "@iconify/react";
+import { useState } from "react";
 
 export default function Sidebar({ onToggle }) {
   const location = useLocation();
+  const [openMenu, setOpenMenu] = useState(""); // track open first-level menu
+
+  const toggleMenu = (menu) => {
+    setOpenMenu(openMenu === menu ? "" : menu);
+  };
 
   return (
     <aside className="side-mini-panel with-vertical">
@@ -81,17 +87,15 @@ export default function Sidebar({ onToggle }) {
                   <span className="sidebar-divider"></span>
                 </li>
                 <li
-                  className={`sidebar-item ${
-                    location.pathname.startsWith("/admin/dashboard")
+                  className={`sidebar-item ${location.pathname.startsWith("/admin/dashboard")
                       ? "active"
                       : ""
-                  }`}
+                    }`}
                 >
                   <Link
                     to="/admin/dashboard"
-                    className={`sidebar-link ${
-                      location.pathname === "/admin/dashboard" ? "active" : ""
-                    }`}
+                    className={`sidebar-link ${location.pathname === "/admin/dashboard" ? "active" : ""
+                      }`}
                     aria-expanded={
                       location.pathname.startsWith("/admin/dashboard")
                         ? "true"
@@ -105,56 +109,60 @@ export default function Sidebar({ onToggle }) {
 
                 <li className="sidebar-item">
                   <Link
-                    to="/admin/dashboard"
-                    className={`sidebar-link has-arrow  ${
-                      location.pathname === "/admin/blog" ? "active" : ""
-                    }`}
-                    aria-expanded="false"
-                  >
-                    <Icon icon="solar:widget-4-line-duotone"></Icon>
-                    <span className="hide-menu">Coffee Shop</span>
-                  </Link>
-                  {/* first-level in */}
-                  <ul aria-expanded="false" className="collapse">
-                    <li className="sidebar-item">
-                      <Link
-                        className={`sidebar-link ${
-                          location.pathname === "/admin/blog-post"
-                            ? "active"
-                            : ""
-                        }`}
-                        to="/admin/blog-post"
-                      >
-                        <span className="icon-small"></span>Blog Posts
-                      </Link>
-                    </li>
-                    <li className="sidebar-item">
-                      <Link
-                        to="/admin/blog-details"
-                        className={`sidebar-link ${
-                          location.pathname === "/admin/blog-details"
-                            ? "active"
-                            : ""
-                        }`}
-                      >
-                        <span className="icon-small"></span>Blog Details
-                      </Link>
-                    </li>
-                  </ul>
-                </li>
-
-                <li className="sidebar-item">
-                  <Link
                     to="/admin/user-list"
-                    className={`sidebar-link ${
-                      location.pathname === "/admin/user-list" ? "active" : ""
-                    }`}
+                    className={`sidebar-link ${location.pathname === "/admin/user-list" ? "active" : ""
+                      }`}
                     aria-expanded="false"
                   >
                     <Icon icon="solar:shield-user-line-duotone"></Icon>
                     Users
                   </Link>
                 </li>
+                <li className="sidebar-item">
+                  <Link
+                    to="/admin/coffee-shop-list"
+                    className={`sidebar-link ${location.pathname === "/admin/coffee-shop-list" ? "active" : ""
+                      }`}
+                    aria-expanded="false"
+                  >
+                    <Icon icon="solar:shield-user-line-duotone"></Icon>
+                    Coffee Shops
+                  </Link>
+                </li>
+
+                <li className="sidebar-item">
+                  <div
+                    className={`sidebar-link has-arrow ${location.pathname.startsWith("/admin/blog") ? "active" : ""
+                      }`}
+                    onClick={() => toggleMenu("questions")}
+                    style={{ cursor: "pointer" }}
+                    aria-expanded={openMenu === "questions" ? "true" : "false"}
+                  >
+                    <Icon icon="solar:widget-4-line-duotone" />
+                    <span className="hide-menu">Questions</span>
+                  </div>
+
+                  <ul className={`collapse ${openMenu === "questions" ? "show" : ""}`}>
+                    <li className="sidebar-item">
+                      <Link
+                        className={`sidebar-link ${location.pathname === "/admin/questions" ? "active" : ""}`}
+                        to="/admin/questions"
+                      >
+                        <span className="icon-small"></span>List
+                      </Link>
+                    </li>
+                    <li className="sidebar-item">
+                      <Link
+                        className={`sidebar-link ${location.pathname === "/admin/question-categories" ? "active" : ""}`}
+                        to="/admin/question-categories"
+                      >
+                        <span className="icon-small"></span>Category
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+
+                
               </ul>
             </nav>
           </div>

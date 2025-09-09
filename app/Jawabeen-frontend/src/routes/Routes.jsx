@@ -35,6 +35,8 @@ const AppRoutes = ({ user }) => {
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="user-list" element={<UserList />} />
             <Route path="coffee-shop-list" element={<CoffeeShopList />} />
+            <Route path="question-categories" element={<CoffeeShopList />} />
+            <Route path="questions" element={<CoffeeShopList />} />
           </Route>
         </Route>
       </Routes>
