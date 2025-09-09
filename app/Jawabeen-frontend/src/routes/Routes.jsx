@@ -7,6 +7,11 @@ import PublicRoute from "./PublicLayout";
 
 import UserList from "../pages/admin/User/Index";
 import CoffeeShopList from "../pages/admin/CoffeeShop/Index";
+import QuestionList from "../pages/admin/Question/Index";
+import AddQuestion from "../pages/admin/Question/Add";
+import QuestionCategoryList from "../pages/admin/Question/Category/Index";
+
+
 
 
 const AppRoutes = ({ user }) => {
@@ -35,8 +40,10 @@ const AppRoutes = ({ user }) => {
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="user-list" element={<UserList />} />
             <Route path="coffee-shop-list" element={<CoffeeShopList />} />
-            <Route path="question-categories" element={<CoffeeShopList />} />
-            <Route path="questions" element={<CoffeeShopList />} />
+            
+            <Route path="questions" element={<QuestionList />} />
+            <Route path="add-question" element={<AddQuestion />} />
+            <Route path="question-categories" element={<QuestionCategoryList />} />
           </Route>
         </Route>
       </Routes>

@@ -8,7 +8,7 @@ const DataTable = ({ columns, data }) => {
   const totalPages = Math.ceil(data.length / rowsPerPage);
   const startIndex = (currentPage - 1) * rowsPerPage;
   const paginatedData = data.slice(startIndex, startIndex + rowsPerPage);
-  console.log(paginatedData)
+  // console.log(paginatedData)
   return (
     <div className="card card-body">
       <div className="table-responsive">
